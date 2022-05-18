@@ -23,15 +23,26 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
+    // Mongodb Setup
     await client.connect();
     const taskCollection = client
       .db("taskManager")
       .collection("taskCollection");
+
+    // Create a task
     app.post("/task", async (req, res) => {
       // console.log(req.body);
       const newTask = req.body;
       const result = await taskCollection.insertOne(newTask);
       res.send(result);
+    });
+
+    // Read all task
+    app.get("/task", async (req, res) => {
+      const query = {};
+      const cursor = taskCollection.find(query);
+      const tasks = await cursor.toArray();
+      res.send(tasks);
     });
 
     app.get("/new", (req, res) => {
