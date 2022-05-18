@@ -27,9 +27,12 @@ async function run() {
     const taskCollection = client
       .db("taskManager")
       .collection("taskCollection");
-    /* app.post("/task", (req, res) => {
-      console.log(req.body);
-    }); */
+    app.post("/task", async (req, res) => {
+      // console.log(req.body);
+      const newTask = req.body;
+      const result = await taskCollection.insertOne(newTask);
+      res.send(result);
+    });
 
     app.get("/new", (req, res) => {
       res.send("this is new");
@@ -46,9 +49,7 @@ run().catch(console.dir);
 app.get("/", (req, res) => {
   res.send("Hello Worldddddrrrdsss!");
 });
-app.get("/home", (req, res) => {
-  res.send("Hello !");
-});
+
 /* app.post("/task", (req, res) => {
   console.log(req.body);
 }); */
