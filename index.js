@@ -32,7 +32,7 @@ async function run() {
     }); */
 
     app.get("/new", (req, res) => {
-      console.log("this is new");
+      res.send("this is new");
     });
   } catch (err) {
     console.log(err);
