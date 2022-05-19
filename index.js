@@ -4,6 +4,7 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
+const ObjectId = require("mongodb").ObjectId;
 const app = express();
 
 // Middleware
@@ -43,6 +44,14 @@ async function run() {
       const cursor = taskCollection.find(query);
       const tasks = await cursor.toArray();
       res.send(tasks);
+    });
+
+    app.delete("/task/:id", async (req, res) => {
+      console.log(req.params.id);
+
+      const query = { _id: ObjectId(id) };
+      const result = await taskCollection.deleteOne(query);
+      res.send(result);
     });
 
     app.get("/new", (req, res) => {
