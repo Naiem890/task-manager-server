@@ -4,7 +4,6 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
-// const ObjectId = require("mongodb").ObjectId;
 const app = express();
 
 // Middleware
@@ -32,7 +31,6 @@ async function run() {
 
     // Create a task
     app.post("/task", async (req, res) => {
-      // console.log(req.body);
       const newTask = req.body;
       const result = await taskCollection.insertOne(newTask);
       res.send(result);
@@ -53,10 +51,6 @@ async function run() {
       const result = await taskCollection.deleteOne(query);
       res.send(result);
     });
-
-    app.get("/new", (req, res) => {
-      res.send("this is new");
-    });
   } catch (err) {
     console.log(err);
   } finally {
@@ -65,14 +59,9 @@ async function run() {
 }
 run().catch(console.dir);
 
-// EndPoints
 app.get("/", (req, res) => {
-  res.send("Hello Worldddddrrrdsss!");
+  res.send("Hello world!");
 });
-
-/* app.post("/task", (req, res) => {
-  console.log(req.body);
-}); */
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
