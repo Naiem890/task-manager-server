@@ -1,10 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
-const ObjectId = require("mongodb").ObjectId;
+// const ObjectId = require("mongodb").ObjectId;
 const app = express();
 
 // Middleware
@@ -48,7 +48,7 @@ async function run() {
 
     app.delete("/task/:id", async (req, res) => {
       console.log(req.params.id);
-
+      const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await taskCollection.deleteOne(query);
       res.send(result);
