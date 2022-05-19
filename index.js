@@ -13,7 +13,6 @@ app.use(express.json());
 // Connect with mongodb
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.h7lye.mongodb.net/?retryWrites=true&w=majority`;
-console.log(uri);
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
